@@ -119,6 +119,12 @@ print(args)
 
 will decode NCLF-formatted command line arguments and print the result.
 
+### Command line
+
+[nclf-python](https://github.com/peterkuma/nclf-python) contains a command
+line program `nclf` which decodes NCLF-formatted commmand line arguments
+and outputs the resulting JSON to the standard output.
+
 ## License
 
 The NCLF specification is public domain.
