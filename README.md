@@ -83,7 +83,8 @@ Positional arguments which would otherwise be recognised as named arguments
 can be encoded as JSON string, e.g. '"x=1"' in Bourne shell will ensure
 "x=1" is passed to the process, interpreted as a JSON string instead of
 {"x": 1}. To ensure file names or user-supplied arguments are not interpreted
-as named arguments, we suggest using the tool as_s, e.g.:
+as named arguments, we suggest using the tool
+[as_s](https://github.com/peterkuma/as_s), e.g.:
 
 ```sh
 program $(as_s *)
@@ -96,7 +97,8 @@ of arguments compatible with Bourne shell.
 
 ### Python
 
-Currently NCLF is implemented by the [nclf-python](https://peterkuma.github.com/nclf-python) package:
+Currently NCLF is implemented by the
+[nclf-python](https://github.com/peterkuma/nclf-python) package:
 
 ```python
 import sys
