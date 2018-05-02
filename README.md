@@ -97,7 +97,8 @@ program $(as_s *)
 ```
 
 as_s will encode all of its arguments as JSON strings and output a list
-of arguments compatible with Bourne shell.
+of arguments compatible with Bourne shell, handling binary arguments
+properly.
 
 **Note:** Any untrusted string input should be passed either inside a JSON
 value or via as_s. as_s supports arbitrary binary values.
