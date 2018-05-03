@@ -60,10 +60,30 @@ program x='{"y": "z"}'
 [[], {"x": {"y": "z"}}]
 ```
 
+## Boolean arguments
+
+```sh
+program +xyz ++abc
+```
+
+```json
+["", {"x": true, "y": true, "z": true, "abc": true}]
+```
+
 ### String encoding
 
 ```sh
 program '"x=1"'
+```
+
+```json
+["x=1", {}]
+```
+
+## Literal positional arguments after =
+
+```sh
+program = x=1
 ```
 
 ```json
@@ -103,6 +123,20 @@ properly.
 **Note:** Any untrusted string input should be passed either inside a JSON
 value or via as_s. as_s supports arbitrary binary values.
 
+**Note:** UTF-8 encoded unicode strings can be passed as values, and if
+properly encoded they are decoded as JSON strings. If not properly encoded,
+they are treated as binary strings. Literal strings following '=' are always
+binary, as are strings passed via `as_s`.
+
+Alternatively, positional arguments can be passed after `=`, in which case
+they are treated as string literals without any interpretation.
+
+Arguments starting with `+` followed by one or more `[a-zA-Z0-9]` characters
+are short boolean named arguments with characters corresponding to names.
+
+Arguments starting with `++` followed by a valid name are long boolean named
+arguments.
+
 ## Implementations
 
 ### Python
@@ -125,6 +159,42 @@ will decode NCLF-formatted command line arguments and print the result.
 [nclf-python](https://github.com/peterkuma/nclf-python) contains a command
 line program `nclf` which decodes NCLF-formatted commmand line arguments
 and outputs the resulting JSON to the standard output.
+
+## More examples
+
+What some common commands would look like if they were using NCLF:
+
+```sh
+grep --help
+grep ++help
+```
+
+```sh
+ls -l -- *
+ls +l = *
+# Note that ls -l * could fail with arbitrarily named files.
+```
+
+```sh
+tar xzf archive.tar.gz
+tar +xz f=archive.tar.gz
+```
+
+## Conventional argument passing issues
+
+Conventional argument passing has numerous issues, which NCLF tries to address:
+
+- Commands such as `program -x argument` have ambiguous interpretation,
+`argument` can be either positional or the value of `-x`. This limits
+interoperability with other interfaces.
+
+- `--` to separate literal arguments is not widely implemented and used.
+
+- Conventional argument passing is not as powerful as function calling,
+limiting the use of command line programs.
+
+- The burden of decoding argument values is left on the program, and is often
+not clearly defined.
 
 ## License
 
