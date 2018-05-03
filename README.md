@@ -50,7 +50,7 @@ program [1,2,3]
 [[1, 2, 3], {}]
 ```
 
-## JSON object as named argument
+### JSON object as named argument
 
 ```sh
 program x='{"y": "z"}'
@@ -60,7 +60,7 @@ program x='{"y": "z"}'
 [[], {"x": {"y": "z"}}]
 ```
 
-## Boolean arguments
+### Boolean arguments
 
 ```sh
 program +xyz ++abc
@@ -80,7 +80,7 @@ program '"x=1"'
 ["x=1", {}]
 ```
 
-## Literal positional arguments after =
+### Literal positional arguments after =
 
 ```sh
 program = x=1
